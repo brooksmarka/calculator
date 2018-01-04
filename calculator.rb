@@ -1,21 +1,40 @@
 puts "Welcome to the Calculator!"
-    puts "Please calculate  . i.e '4+3*4'"
+puts "Please calculate  . i.e '4+3*4'"
 
-    #gets user input and creates array for each value
-    cal = gets.chomp.split(%r{(\+|\-|\/|\*)}).map do |x|
-      unless x =~ /(\+|\-|\/|\*)/ then x.to_i else x.to_sym end
-    end
+input = gets.chomp
 
-    result = 0
-    while cal.length >= 2
+#checks to see if string contains parenthesis
+#if true outputs string within parenthesis
+#if false outputs full string
+def parenCheck(x)
+  if (x.include? "(" && ")")
+   x.slice( /(?<=\()(.*)(?=\))/ )
+  else
+   x
+  end
+ end
+
+#receives a string and creates an array of symbols and numbers
+def splitter(x)
+  x.split(%r{(\+|\-|\/|\*)}).map do |x|
+    unless x =~ /(\+|\-|\/|\*)/ then x.to_i else x.to_sym end
+  end
+end
+
+#calculates arguments on either side of the first symbol
+#removes the calculated values and replaces with result
+def calculate (x)
+    while x.length >= 2
       #recv, meth, arg = cal
-      result = cal[0].public_send(cal[1], cal[2])
-      cal.shift(3)
-      cal.unshift(result)
+      result = x[0].public_send(x[1], x[2])
+      x.shift(3)
+      x.unshift(result)
 
     end
+   result
+end
 
-new = result.to_i
-print new
-print "\n"
-true
+checked = parenCheck(input)
+split = splitter(checked)
+
+p calculate(split)
