@@ -14,11 +14,16 @@ puts "Welcome to the Calculator!"
 
     end
 
-result = 0
-while cal.length >= 2
-  #recv, meth, arg = cal
-  result = cal[0].public_send(cal[1], cal[2])
-  cal.shift(3)
-  cal.unshift(result)
+    result = 0
+    while cal.length >= 2
+      #recv, meth, arg = cal
+      result = cal[0].send(cal[1], cal[2])
+      cal.shift(3)
+      cal.unshift(result)
 
-end
+    end
+
+  final = result.to_i
+  print final
+  print "\n"
+  #true
