@@ -1,5 +1,5 @@
 puts "Welcome to the Calculator!"
-    puts "Please calculate  . i.e '4+3*4'"
+    puts "Please calculate  . i.e 4+3*4"
 
     #gets user input and creates array for each value
     cal = gets.chomp.split(%r{(\+|\-|\/|\*)}).map do |x|
